@@ -1,0 +1,93 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    ast (2.4.0)
+    coderay (1.1.2)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    diff-lcs (1.3)
+    dotenv (2.7.5)
+    faraday (1.0.1)
+      multipart-post (>= 1.2, < 3)
+    hashdiff (1.0.1)
+    hashie (3.6.0)
+    httparty (0.18.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
+    inflection (1.0.0)
+    jaro_winkler (1.5.4)
+    method_source (1.0.0)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2019.1009)
+    multi_xml (0.6.0)
+    multipart-post (2.1.1)
+    opsgenie-schedule (0.1.3)
+      httparty (~> 0.17)
+    parallel (1.19.1)
+    parser (2.7.1.1)
+      ast (~> 2.4.0)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    public_suffix (4.0.4)
+    rainbow (3.0.0)
+    rake (13.0.1)
+    rexml (3.2.4)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
+    rspec-expectations (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-support (3.9.2)
+    rubocop (0.80.1)
+      jaro_winkler (~> 1.5.1)
+      parallel (~> 1.10)
+      parser (>= 2.7.0.1)
+      rainbow (>= 2.2.2, < 4.0)
+      rexml
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-performance (1.5.2)
+      rubocop (>= 0.71.0)
+    ruby-progressbar (1.10.1)
+    safe_yaml (1.0.5)
+    standard (0.2.4)
+      rubocop (~> 0.80.1)
+      rubocop-performance (~> 1.5.2)
+    unicode-display_width (1.6.1)
+    webmock (3.8.3)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+    zendesk_api (1.25.0)
+      faraday (>= 0.9.0, < 2.0.0)
+      hashie (>= 3.5.2, < 4.0.0)
+      inflection
+      mime-types
+      multipart-post (~> 2.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dotenv
+  opsgenie-schedule
+  pry
+  rake
+  rspec
+  standard
+  webmock
+  zendesk_api
+
+BUNDLED WITH
+   2.1.4
