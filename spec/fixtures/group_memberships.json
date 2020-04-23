@@ -1,0 +1,22 @@
+{
+  "group_memberships": [
+    {
+      "url": "https://dxw.zendesk.com/api/v2/group_memberships/126699.json",
+      "id": 126699,
+      "user_id": 10793415,
+      "group_id": 72939,
+      "default": true,
+      "created_at": null,
+      "updated_at": "2013-04-01T14:47:53Z"
+    },
+    {
+      "url": "https://dxw.zendesk.com/api/v2/group_memberships/144996.json",
+      "id": 144996,
+      "user_id": 13062170,
+      "group_id": 360008997631,
+      "default": true,
+      "created_at": null,
+      "updated_at": "2013-04-01T14:48:21Z"
+    }
+  ]
+}

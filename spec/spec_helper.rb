@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
 require "huntaway"
 require "webmock/rspec"
+require "support/stubs"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
