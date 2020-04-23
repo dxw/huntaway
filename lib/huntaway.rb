@@ -44,6 +44,8 @@ class Huntaway
   end
 
   def current_support_users
-    opsgenie_schedule.on_calls
+    today = DateTime.now
+    date = DateTime.new(today.year, today.month, today.day, 12, 0o0)
+    opsgenie_schedule.on_calls(date)
   end
 end

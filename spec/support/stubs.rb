@@ -15,7 +15,7 @@ module Stubs
   end
 
   def stub_opsgenie_oncalls
-    stub_request(:get, "https://api.opsgenie.com/v2/schedules/e71d500f-896a-4b28-8b08-3bfe56e1ed76/on-calls")
+    stub_request(:get, "https://api.opsgenie.com/v2/schedules/e71d500f-896a-4b28-8b08-3bfe56e1ed76/on-calls?date=2020-04-23T12:00:00%2B00:00")
       .to_return(stubbed_json_body("opsgenie_oncalls.json"))
   end
 
