@@ -8,3 +8,9 @@ require "standard/rake"
 RSpec::Core::RakeTask.new(:spec)
 
 task default: %i[standard spec]
+
+namespace :huntaway do
+  task :run do
+    Huntaway.new.run!
+  end
+end
