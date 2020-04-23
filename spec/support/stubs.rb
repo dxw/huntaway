@@ -1,11 +1,11 @@
 module Stubs
   def stub_list_group_memberships
-    stub_request(:get, "https://dxw.zendesk.com/api/v2/group_memberships")
+    stub_request(:get, "#{ENV["ZENDESK_API_URL"]}/group_memberships")
       .to_return(stubbed_json_body("group_memberships.json"))
   end
 
   def stub_delete_group_membership(membership_id)
-    stub_request(:delete, "https://dxw.zendesk.com/api/v2/group_memberships/#{membership_id}.json")
+    stub_request(:delete, "#{ENV["ZENDESK_API_URL"]}/group_memberships/#{membership_id}.json")
       .to_return(status: 200, body: "", headers: {})
   end
 
@@ -25,12 +25,12 @@ module Stubs
   end
 
   def stub_zendesk_user_search(query)
-    stub_request(:get, "https://dxw.zendesk.com/api/v2/users/search?query=#{query}")
+    stub_request(:get, "#{ENV["ZENDESK_API_URL"]}/users/search?query=#{query}")
       .to_return(stubbed_json_body("zendesk_user_search.json"))
   end
 
   def stub_group_membership_creation(user_id:, group_id:)
-    stub_request(:post, "https://dxw.zendesk.com/api/v2/group_memberships")
+    stub_request(:post, "#{ENV["ZENDESK_API_URL"]}/group_memberships")
       .with(
         body: {
           "group_membership": {
