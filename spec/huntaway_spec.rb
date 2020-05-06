@@ -2,11 +2,16 @@ require "spec_helper"
 
 RSpec.describe Huntaway do
   before do
+    Timecop.freeze("2020-04-23")
     stub_list_group_memberships
     stub_opsgenie_schedule
     stub_opsgenie_oncalls
     stub_opsgenie_users
     stub_zendesk_user_search("example@dxw.com")
+  end
+
+  after do
+    Timecop.return
   end
 
   let!(:delete_group) { stub_delete_group_membership(144996) }
