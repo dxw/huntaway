@@ -17,9 +17,8 @@ class Huntaway
   private
 
   def assign_current_support_users_to_group
-    current_support_users.each do |user|
-      user = client.users.search(query: user.username).first
-      client.group_memberships.create!(user_id: user.id, group_id: GROUP_ID)
+    current_support_user_ids.each do |id|
+      client.group_memberships.create!(user_id: id, group_id: GROUP_ID)
     end
   end
 
@@ -41,6 +40,13 @@ class Huntaway
 
   def opsgenie_schedule
     @opsgenie_schedule ||= Opsgenie::Schedule.find_by_id(OPSGENIE_SCHEDULE_ID)
+  end
+
+  def current_support_user_ids
+    current_support_users.map { |u|
+      user = client.users.search(query: u.username).first
+      user.fetch(:id, nil)
+    }.compact.uniq
   end
 
   def current_support_users

@@ -8,6 +8,7 @@ RSpec.describe Huntaway do
     stub_opsgenie_oncalls
     stub_opsgenie_users
     stub_zendesk_user_search("example@dxw.com")
+    stub_zendesk_user_search("foo@dxw.com")
   end
 
   after do
