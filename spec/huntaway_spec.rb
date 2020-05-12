@@ -16,7 +16,7 @@ RSpec.describe Huntaway do
   end
 
   let!(:delete_group) { stub_delete_group_membership(144996) }
-  let!(:group_membership_creation) { stub_group_membership_creation(user_id: 375550676351, group_id: 360008997631) }
+  let!(:group_membership_creation) { stub_group_membership_creation(user_id: 375550676351, group_id: Huntaway::GROUP_ID) }
 
   it "deletes all group memberships" do
     described_class.new.run!
