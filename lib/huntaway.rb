@@ -6,7 +6,7 @@ Dotenv.load
 Opsgenie.configure(api_key: ENV["OPSGENIE_API_KEY"])
 
 class Huntaway
-  GROUP_ID = 21306177
+  FIRST_LINE_DEV_SUPPORT_GROUP_ID = 21306177
   OPSGENIE_SCHEDULE_ID = "e71d500f-896a-4b28-8b08-3bfe56e1ed76"
 
   def run!
@@ -18,13 +18,13 @@ class Huntaway
 
   def assign_current_support_users_to_group
     current_support_user_ids.each do |id|
-      client.group_memberships.create!(user_id: id, group_id: GROUP_ID)
+      client.group_memberships.create!(user_id: id, group_id: FIRST_LINE_DEV_SUPPORT_GROUP_ID)
     end
   end
 
   def unassign_users_from_group
     client.group_memberships.all! do |group_membership|
-      group_membership.destroy! if group_membership["group_id"] == GROUP_ID
+      group_membership.destroy! if group_membership["group_id"] == FIRST_LINE_DEV_SUPPORT_GROUP_ID
     end
   end
 
