@@ -3,11 +3,11 @@ require "dotenv"
 require "opsgenie"
 
 Dotenv.load
-Opsgenie.configure(api_key: ENV["OPSGENIE_API_KEY"])
+Opsgenie.configure(api_key: ENV.fetch("OPSGENIE_API_KEY"))
 
 class Huntaway
-  FIRST_LINE_DEV_SUPPORT_GROUP_ID = ENV["FIRST_LINE_DEV_SUPPORT_GROUP_ID"].to_i
-  OPSGENIE_SCHEDULE_ID = ENV["OPSGENIE_SCHEDULE_ID"]
+  FIRST_LINE_DEV_SUPPORT_GROUP_ID = ENV.fetch("FIRST_LINE_DEV_SUPPORT_GROUP_ID").to_i
+  OPSGENIE_SCHEDULE_ID = ENV.fetch("OPSGENIE_SCHEDULE_ID")
 
   def run!
     unassign_users_from_group
@@ -31,9 +31,9 @@ class Huntaway
   def client
     @client ||= begin
       ZendeskAPI::Client.new do |config|
-        config.url = ENV["ZENDESK_API_URL"]
-        config.username = ENV["ZENDESK_USERNAME"]
-        config.token = ENV["ZENDESK_API_KEY"]
+        config.url = ENV.fetch("ZENDESK_API_URL")
+        config.username = ENV.fetch("ZENDESK_USERNAME")
+        config.token = ENV.fetch("ZENDESK_API_KEY")
       end
     end
   end
