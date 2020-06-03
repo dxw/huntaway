@@ -8,12 +8,12 @@
     "onCallParticipants": [
       {
         "id": "19e39115-07d5-4924-8295-332a66dd1569",
-        "name": "example@dxw.com",
+        "name": "in_group_on_support@example.com",
         "type": "user"
       },
       {
         "id": "1073ed22-c7c4-483b-9ade-036ba0a1cb57",
-        "name": "foo@dxw.com",
+        "name": "out_group_on_support@example.com",
         "type": "user"
       }
     ]

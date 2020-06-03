@@ -4,8 +4,8 @@
       "blocked": false,
       "verified": true,
       "id": "8be02293-95fb-43d1-91cf-703ba8c74934",
-      "username": "example@dxw.com",
-      "fullName": "example example",
+      "username": "in_group_on_support@example.com",
+      "fullName": "Ingroup Onsupport",
       "role": {
         "id": "Owner",
         "name": "Owner"
@@ -24,9 +24,52 @@
     {
       "blocked": false,
       "verified": true,
-      "id": "8be02293-95fb-43d1-91cf-703ba8c74934",
-      "username": "foo@dxw.com",
-      "fullName": "example example",
+      "id": "6e06c14b-1fc6-41fd-ae7a-26385ef15a8e",
+      "username": "in_group_off_support@example.com",
+      "fullName": "Ingroup Offsupport",
+      "role": {
+        "id": "Owner",
+        "name": "Owner"
+      },
+      "timeZone": "Europe/London",
+      "locale": "en_GB",
+      "userAddress": {
+        "country": "",
+        "state": "",
+        "city": "",
+        "line": "",
+        "zipCode": ""
+      },
+      "createdAt": "2018-03-01T14:49:54.678Z"
+    }
+    ,
+    {
+      "blocked": false,
+      "verified": true,
+      "id": "277de49b-4c0b-403a-b294-c8cb1715346a",
+      "username": "out_group_on_support@example.com",
+      "fullName": "Outgroup Onsupport",
+      "role": {
+        "id": "Owner",
+        "name": "Owner"
+      },
+      "timeZone": "Europe/London",
+      "locale": "en_GB",
+      "userAddress": {
+        "country": "",
+        "state": "",
+        "city": "",
+        "line": "",
+        "zipCode": ""
+      },
+      "createdAt": "2018-03-01T14:49:54.678Z"
+    },
+    {
+      "blocked": false,
+      "verified": true,
+      "id": "2d2219a3-11bf-47ed-856a-21cc89cea44c",
+      "username": "out_group_off_support@example.com",
+      "fullName": "Outgroup Offsupport",
       "role": {
         "id": "Owner",
         "name": "Owner"

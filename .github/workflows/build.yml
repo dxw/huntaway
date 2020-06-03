@@ -3,7 +3,7 @@ env:
   ZENDESK_USERNAME: "email@example.com"
   ZENDESK_API_KEY: "some-fake-api-key"
   OPSGENIE_API_KEY: "some-fake-api-key"
-  FIRST_LINE_DEV_SUPPORT_GROUP_ID: 21306177
+  FIRST_LINE_DEV_SUPPORT_GROUP_ID: 444111
   OPSGENIE_SCHEDULE_ID: "e71d500f-896a-4b28-8b08-3bfe56e1ed76"
 
 on: [push]
@@ -23,4 +23,4 @@ jobs:
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
-        bundle exec rake
+        script/test

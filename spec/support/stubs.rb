@@ -24,9 +24,9 @@ module Stubs
       .to_return(stubbed_json_body("opsgenie_users.json"))
   end
 
-  def stub_zendesk_user_search(query)
+  def stub_zendesk_user_search(query, variant)
     stub_request(:get, "#{ENV["ZENDESK_API_URL"]}/users/search?query=#{query}")
-      .to_return(stubbed_json_body("zendesk_user_search.json"))
+      .to_return(stubbed_json_body("zendesk_user_search_" + variant + ".json"))
   end
 
   def stub_group_membership_creation(user_id:, group_id:)
