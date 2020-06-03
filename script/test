@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# script/test: Run test suite for application.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+echo "==> Running tests…"
+
+bundle exec rake FIRST_LINE_DEV_SUPPORT_GROUP_ID=444111

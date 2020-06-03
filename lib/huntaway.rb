@@ -10,21 +10,31 @@ class Huntaway
   OPSGENIE_SCHEDULE_ID = ENV.fetch("OPSGENIE_SCHEDULE_ID")
 
   def run!
-    unassign_users_from_group
-    assign_current_support_users_to_group
+    @existing_group_memberships = []
+    @current_support_user_ids = current_support_user_ids.freeze
+
+    unassign_extra_users_from_group
+    assign_missing_support_users_to_group
   end
 
   private
 
-  def assign_current_support_users_to_group
-    current_support_user_ids.each do |id|
-      client.group_memberships.create!(user_id: id, group_id: FIRST_LINE_DEV_SUPPORT_GROUP_ID)
+  def assign_missing_support_users_to_group
+    @current_support_user_ids.each do |id|
+      unless @existing_group_memberships.include?(id)
+        client.group_memberships.create!(user_id: id, group_id: FIRST_LINE_DEV_SUPPORT_GROUP_ID)
+      end
     end
   end
 
-  def unassign_users_from_group
+  def unassign_extra_users_from_group
     client.group_memberships.all! do |group_membership|
-      group_membership.destroy! if group_membership["group_id"] == FIRST_LINE_DEV_SUPPORT_GROUP_ID
+      if group_membership["group_id"] == FIRST_LINE_DEV_SUPPORT_GROUP_ID
+        @existing_group_memberships << group_membership["user_id"]
+        unless @current_support_user_ids.include?(group_membership["user_id"])
+          group_membership.destroy!
+        end
+      end
     end
   end
 

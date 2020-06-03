@@ -27,9 +27,9 @@ Copy `.env.example` to a file called `.env` and fill in the variables with some 
 
 This will do the following:
 
-* Remove all current users from the group specified in `Huntaway::GROUP_ID`
 * Check who is on call for the schedule specified in `Huntaway::OPSGENIE_SCHEDULE_ID`
-* Add those users to the Zendesk group specified in `Huntaway::GROUP_ID`
+* Remove all users from the group specified in `Huntaway::GROUP_ID` who aren't currently in the schedule
+* Add users to the Zendesk group specified in `Huntaway::GROUP_ID` who are in the schedule but who aren't in the group
 
 ```bash
 bundle exec rake huntaway:run
