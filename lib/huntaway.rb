@@ -6,8 +6,8 @@ Dotenv.load
 Opsgenie.configure(api_key: ENV["OPSGENIE_API_KEY"])
 
 class Huntaway
-  FIRST_LINE_DEV_SUPPORT_GROUP_ID = 21306177
-  OPSGENIE_SCHEDULE_ID = "e71d500f-896a-4b28-8b08-3bfe56e1ed76"
+  FIRST_LINE_DEV_SUPPORT_GROUP_ID = ENV["FIRST_LINE_DEV_SUPPORT_GROUP_ID"].to_i
+  OPSGENIE_SCHEDULE_ID = ENV["OPSGENIE_SCHEDULE_ID"]
 
   def run!
     unassign_users_from_group
