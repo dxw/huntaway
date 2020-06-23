@@ -17,13 +17,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Ruby 2.6
-      uses: actions/setup-ruby@v1
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+    - name: Set up cache
+      uses: actions/cache@v2
       with:
-        ruby-version: 2.6.x
-    - name: Assign current support user to correct group
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: Install dependencies
       run: |
         gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rake huntaway:assign_incoming_support_user
+        bundle install --jobs 4 --retry 3 --path ./vendor/bundle
+    - name: Assign current support user to correct group
+      run: bundle exec rake huntaway:assign_incoming_support_user
