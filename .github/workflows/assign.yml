@@ -1,12 +1,15 @@
-name: Build
+name: Assign incoming support user to the first line support group
 env:
-  ZENDESK_USERNAME: "email@example.com"
-  ZENDESK_API_KEY: "some-fake-api-key"
-  OPSGENIE_API_KEY: "some-fake-api-key"
-  FIRST_LINE_DEV_SUPPORT_GROUP_ID: 444111
+  ZENDESK_API_URL: ${{ secrets.ZENDESK_API_URL }}
+  ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME }}
+  ZENDESK_API_KEY: ${{ secrets.ZENDESK_API_KEY }}
+  OPSGENIE_API_KEY: ${{ secrets.OPSGENIE_API_KEY }}
+  FIRST_LINE_DEV_SUPPORT_GROUP_ID: 21306177
   OPSGENIE_SCHEDULE_ID: "e71d500f-896a-4b28-8b08-3bfe56e1ed76"
 
-on: [push]
+on:
+  schedule:
+    - cron: '0 6 * * MON-FRI'
 
 jobs:
   build:
@@ -27,5 +30,5 @@ jobs:
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3 --path ./vendor/bundle
-    - name: Build and test with Rake
-      run: script/test
+    - name: Assign current support user to correct group
+      run: bundle exec rake huntaway:assign_incoming_support_user

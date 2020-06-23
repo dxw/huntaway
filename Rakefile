@@ -10,7 +10,11 @@ RSpec::Core::RakeTask.new(:spec)
 task default: %i[standard spec]
 
 namespace :huntaway do
-  task :run do
-    Huntaway.new.run!
+  task :assign_incoming_support_user do
+    Huntaway.new.assign_incoming_support_user!
+  end
+
+  task :unassign_extra_users_from_group do
+    Huntaway.new.unassign_extra_users_from_group!
   end
 end

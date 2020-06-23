@@ -1,3 +1,5 @@
+ENV["FIRST_LINE_DEV_SUPPORT_GROUP_ID"] = "444111"
+
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
 require "huntaway"
