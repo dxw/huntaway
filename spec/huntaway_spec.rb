@@ -21,28 +21,32 @@ RSpec.describe Huntaway do
   let!(:wanted_membership_creation) { stub_group_membership_creation(user_id: 999001, group_id: ENV["FIRST_LINE_DEV_SUPPORT_GROUP_ID"].to_i) }
   let!(:unwanted_membership_creation) { stub_group_membership_creation(user_id: 999101, group_id: ENV["FIRST_LINE_DEV_SUPPORT_GROUP_ID"].to_i) }
 
-  it "deletes group memberships for users in group but not on support" do
-    described_class.new.run!
-    expect(wanted_membership_deletion).to have_been_made.once
+  describe "#assign_incoming_support_user!" do
+    it "assigns the incoming support user to the first line support group" do
+      described_class.new.assign_incoming_support_user!
+      expect(wanted_membership_creation).to have_been_made.once
+    end
+
+    it "does not create group memberships for users on support and already in group" do
+      described_class.new.assign_incoming_support_user!
+      expect(unwanted_membership_creation).to_not have_been_made
+    end
   end
 
-  it "does not delete group memberships for users in group and on support" do
-    described_class.new.run!
-    expect(unwanted_membership_deletion).to_not have_been_made
-  end
+  describe "#unassign_extra_users_from_group!" do
+    it "deletes group memberships for users in group but not on support" do
+      described_class.new.unassign_extra_users_from_group!
+      expect(wanted_membership_deletion).to have_been_made.once
+    end
 
-  it "does not delete memberships of other groups" do
-    described_class.new.run!
-    expect(other_group_membership_deletion).to_not have_been_made
-  end
+    it "does not delete group memberships for users in group and on support" do
+      described_class.new.unassign_extra_users_from_group!
+      expect(unwanted_membership_deletion).to_not have_been_made
+    end
 
-  it "creates group memberships for users on support and not in group" do
-    described_class.new.run!
-    expect(wanted_membership_creation).to have_been_made.once
-  end
-
-  it "does not create group memberships for users on support and already in group" do
-    described_class.new.run!
-    expect(unwanted_membership_creation).to_not have_been_made
+    it "does not delete memberships of other groups" do
+      described_class.new.unassign_extra_users_from_group!
+      expect(other_group_membership_deletion).to_not have_been_made
+    end
   end
 end

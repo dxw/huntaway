@@ -9,34 +9,25 @@ class Huntaway
   FIRST_LINE_DEV_SUPPORT_GROUP_ID = ENV.fetch("FIRST_LINE_DEV_SUPPORT_GROUP_ID").to_i
   OPSGENIE_SCHEDULE_ID = ENV.fetch("OPSGENIE_SCHEDULE_ID")
 
-  def run!
-    @existing_group_memberships = []
-    @current_support_user_ids = current_support_user_ids.freeze
+  def assign_incoming_support_user!
+    current_support_user_ids.each do |id|
+      next if group_memberships.find { |g| g["user_id"] == id }
 
-    unassign_extra_users_from_group
-    assign_missing_support_users_to_group
+      client.group_memberships.create!(user_id: id, group_id: FIRST_LINE_DEV_SUPPORT_GROUP_ID)
+    end
+  end
+
+  def unassign_extra_users_from_group!
+    group_memberships.each do |group_membership|
+      if group_membership["group_id"] == FIRST_LINE_DEV_SUPPORT_GROUP_ID
+        next if current_support_user_ids.include?(group_membership["user_id"])
+
+        group_membership.destroy!
+      end
+    end
   end
 
   private
-
-  def assign_missing_support_users_to_group
-    @current_support_user_ids.each do |id|
-      unless @existing_group_memberships.include?(id)
-        client.group_memberships.create!(user_id: id, group_id: FIRST_LINE_DEV_SUPPORT_GROUP_ID)
-      end
-    end
-  end
-
-  def unassign_extra_users_from_group
-    client.group_memberships.all! do |group_membership|
-      if group_membership["group_id"] == FIRST_LINE_DEV_SUPPORT_GROUP_ID
-        @existing_group_memberships << group_membership["user_id"]
-        unless @current_support_user_ids.include?(group_membership["user_id"])
-          group_membership.destroy!
-        end
-      end
-    end
-  end
 
   def client
     @client ||= begin
@@ -53,7 +44,7 @@ class Huntaway
   end
 
   def current_support_user_ids
-    current_support_users.map { |u|
+    @current_support_user_ids ||= current_support_users.map { |u|
       user = client.users.search(query: u.username).first
       user.fetch(:id, nil)
     }.compact.uniq
@@ -63,5 +54,15 @@ class Huntaway
     today = DateTime.now
     date = DateTime.new(today.year, today.month, today.day, 12, 0o0)
     opsgenie_schedule.on_calls(date)
+  end
+
+  def group_memberships
+    @group_memberships ||= begin
+      memberships = []
+      client.group_memberships.all! do |membership|
+        memberships << membership
+      end
+      memberships
+    end
   end
 end
