@@ -1,4 +1,4 @@
-name: Run
+name: Assign incoming support user to the first line support group
 env:
   ZENDESK_API_URL: ${{ secrets.ZENDESK_API_URL }}
   ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME }}
@@ -26,4 +26,4 @@ jobs:
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
-        bundle exec rake huntaway:run
+        bundle exec rake huntaway:assign_incoming_support_user
