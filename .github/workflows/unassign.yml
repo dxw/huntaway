@@ -1,0 +1,29 @@
+name: Unassign outgoing support user
+env:
+  ZENDESK_API_URL: ${{ secrets.ZENDESK_API_URL }}
+  ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME }}
+  ZENDESK_API_KEY: ${{ secrets.ZENDESK_API_KEY }}
+  OPSGENIE_API_KEY: ${{ secrets.OPSGENIE_API_KEY }}
+  FIRST_LINE_DEV_SUPPORT_GROUP_ID: 21306177
+  OPSGENIE_SCHEDULE_ID: "e71d500f-896a-4b28-8b08-3bfe56e1ed76"
+
+on:
+  schedule:
+    - cron: '0 15 * * 1-5'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Unassign outgoing support user from the first line support group
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec rake huntaway:unassign_extra_users_from_group
