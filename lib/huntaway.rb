@@ -11,7 +11,7 @@ class Huntaway
 
   def assign_incoming_support_user!
     current_support_user_ids.each do |id|
-      next if group_memberships.find { |g| g["user_id"] == id }
+      next if group_memberships.find { |g| g["user_id"] == id && g["group_id"] == FIRST_LINE_DEV_SUPPORT_GROUP_ID }
 
       client.group_memberships.create!(user_id: id, group_id: FIRST_LINE_DEV_SUPPORT_GROUP_ID)
     end

@@ -26,6 +26,15 @@
       "default": true,
       "created_at": null,
       "updated_at": "2013-04-01T14:48:21Z"
+    },
+    {
+      "url": "https://example.zendesk.com/api/v2/group_memberships/1234.json",
+      "id": 32456,
+      "user_id": 999001,
+      "group_id": 443353,
+      "default": true,
+      "created_at": null,
+      "updated_at": "2013-04-01T14:48:21Z"
     }
   ]
 }
